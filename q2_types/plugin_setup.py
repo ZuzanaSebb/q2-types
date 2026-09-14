@@ -122,11 +122,17 @@ plugin.methods.register_function(
 )
 
 
+ORTHOLOGS = TypeMatch([
+    SampleData[Orthologs % Properties('contigs', 'mags')],
+    SampleData[Orthologs % Properties('mags')],
+    SampleData[Orthologs % Properties('contigs')],
+    SampleData[Orthologs],
+])
 plugin.methods.register_function(
     function=q2_types.genome_data.partition_orthologs,
-    inputs={"orthologs": SampleData[Orthologs]},
+    inputs={"orthologs": ORTHOLOGS},
     parameters={"num_partitions": Int % Range(1, None)},
-    outputs={"partitioned_orthologs": Collection[SampleData[Orthologs]]},
+    outputs={"partitioned_orthologs": Collection[ORTHOLOGS]},
     input_descriptions={"orthologs": "The orthologs to partition."},
     parameter_descriptions={
         "num_partitions": "The number of partitions to split the MAGs"
@@ -178,9 +184,9 @@ plugin.methods.register_function(
 
 plugin.methods.register_function(
     function=q2_types.genome_data.collate_orthologs,
-    inputs={"orthologs": List[SampleData[Orthologs]]},
+    inputs={"orthologs": List[ORTHOLOGS]},
     parameters={},
-    outputs={"collated_orthologs": SampleData[Orthologs]},
+    outputs={"collated_orthologs": ORTHOLOGS},
     input_descriptions={"orthologs": "Orthologs to collate"},
     parameter_descriptions={},
     name="Collate orthologs",
@@ -188,11 +194,17 @@ plugin.methods.register_function(
                 "and collates them into a single artifact.",
 )
 
+NOGS = TypeMatch([
+    GenomeData[NOG % Properties('contigs', 'mags')],
+    GenomeData[NOG % Properties('mags')],
+    GenomeData[NOG % Properties('contigs')],
+    GenomeData[NOG],
+])
 plugin.methods.register_function(
     function=q2_types.genome_data.collate_ortholog_annotations,
-    inputs={'ortholog_annotations': List[GenomeData[NOG]]},
+    inputs={'ortholog_annotations': List[NOGS]},
     parameters={},
-    outputs=[('collated_annotations', GenomeData[NOG])],
+    outputs=[('collated_annotations', NOGS)],
     input_descriptions={
         'ortholog_annotations': "Collection of ortholog annotations."
     },
