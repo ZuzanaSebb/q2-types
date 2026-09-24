@@ -7,7 +7,7 @@
 # ----------------------------------------------------------------------------
 from qiime2.plugin.testing import TestPluginBase
 
-from q2_types.feature_map._methods import collate_contig_maps
+from q2_types.feature_map import collate_contig_maps
 
 
 class TestCollateContigMaps(TestPluginBase):

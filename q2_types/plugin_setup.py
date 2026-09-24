@@ -25,8 +25,7 @@ from q2_types.per_sample_sequences import (
     PairedEndSequencesWithQuality, Contigs
 )
 from q2_types.feature_data import FeatureData, Sequence
-from q2_types.feature_map import FeatureMap, MAGtoContigs
-from q2_types.feature_map._methods import collate_contig_maps
+from q2_types.feature_map import FeatureMap, MAGtoContigs, collate_contig_maps
 from q2_types.genome_data import (
     Orthologs, GenomeData, NOG, Loci, DNASequence, Genes, Proteins
 )
@@ -260,7 +259,7 @@ plugin.methods.register_function(
         "contig_maps": "A collection of MAG-to-contig maps to be collated."
     },
     name="Collate MAG-to-contig maps",
-    description="Takes a collection of FeatureMap[MAGtoContigs]'s "
+    description="Takes a collection of FeatureMap[MAGtoContigs]s "
                 "and collates them into a single artifact.",
 )
 
